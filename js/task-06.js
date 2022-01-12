@@ -1,13 +1,17 @@
 const inputRef = document.querySelector("#validation-input");
 
-const SymbolInput = (event) => {
-  if (event.currentTarget.value.length === 6) {
-    event.currentTarget.classList.add("valid");
-    event.currentTarget.classList.replace("invalid", "valid");
-  } else {
-    event.currentTarget.classList.add("invalid");
-    event.currentTarget.classList.replace("valid", "invalid");
-  }
-};
 
-inputRef.addEventListener("blur", SymbolInput);
+inputRef.addEventListener("input", SymbolInput);
+
+function SymbolInput(event) {
+  const targetInput = event.currentTarget;
+  const inputTargetLength = targetInput.value.length;
+  const validation = Number(targetInput.dataset.length);
+
+  if (inputTargetLength === validation) {
+    targetInput.classList.replace("invalid", "valid");
+  } else {
+    targetInput.classList.add("invalid");
+    targetInput.classList.remove("valid");
+  }
+}
